@@ -1,6 +1,9 @@
 #include "targetver.h"
 #include <stdio.h>
 #include <tchar.h>
+#include <string>
+
+using namespace std;
 
 enum Coins
 {
@@ -14,4 +17,5 @@ class VendingMachine
 {
 public:
 	bool AcceptCoin(Coins coin);
+	string UserDisplay();
 };

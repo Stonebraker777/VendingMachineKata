@@ -16,3 +16,8 @@ bool VendingMachine::AcceptCoin(Coins InsertedCoin)
 	}
 	return true;
 }
+
+string VendingMachine::UserDisplay()
+{
+	return "INSERT COIN";
+}
