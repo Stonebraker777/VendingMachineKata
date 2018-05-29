@@ -92,3 +92,19 @@ bool VendingMachine::SelectProduct(Products Item)
 	}
 	return ProductDispensedFlag;
 }
+
+ChangeType VendingMachine::MakeChange(unsigned int Change)
+{
+	ChangeType CoinChange;
+
+	CoinChange.nQuarters = Change / $QUARTER;
+	Change %= $QUARTER;
+
+	CoinChange.nDimes = Change / $DIME;
+	Change %= $DIME;
+
+	CoinChange.nNickles = Change / $NICKEL;
+	Change %= $NICKEL;
+
+	return CoinChange;
+}

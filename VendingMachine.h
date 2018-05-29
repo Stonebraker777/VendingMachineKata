@@ -19,6 +19,13 @@ enum Coins
 	QUARTER
 };
 
+typedef struct ChangeType
+{
+	unsigned int nNickles = 0;
+	unsigned int nDimes = 0;
+	unsigned int nQuarters = 0;
+};
+
 enum Products
 {
 	PRODUCT_COLA = 1,
@@ -47,6 +54,7 @@ private:
 	bool m_ProductDispensedFlag;
 
 public:
+	ChangeType CoinChange;
 	VendingMachine()
 	{
 		m_VendingMachineState = VMState::STATE_INSERT_COIN;
@@ -61,4 +69,5 @@ public:
 	string UserDisplay();
 	void ReturnCoins();
 	bool SelectProduct(Products Item);
+	ChangeType MakeChange(unsigned int Change);
 };

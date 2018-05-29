@@ -45,6 +45,13 @@ public:
 		assert("PRICE $0.65" == VM.UserDisplay());
 		assert("$0.50" == VM.UserDisplay());
 	}
+	void VerifyMakeChangeMthodReturns2Quarters1DimeAnd1NickelFor65CentsChange()
+	{
+		VM.CoinChange = VM.MakeChange(65);
+		assert(2 == VM.CoinChange.nQuarters);
+		assert(1 == VM.CoinChange.nDimes);
+		assert(1 == VM.CoinChange.nNickles);
+	}
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -57,6 +64,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.WhenChipsItemIsSelectedWithEnoughMoneyInsertedDispensesProductandDisplays_THANK_YOU();
 	Tests.AfterDispensingAnItemWithExactMoneySetTotalBackToZeroDisplayIs_INSERT_COIN();
 	Tests.WhenAnItemIsSelectedWithoutEnoughMoneyInsertedDisplayIs_PRICEXXXThenDisplaysCurrentAmount();
+	Tests.VerifyMakeChangeMthodReturns2Quarters1DimeAnd1NickelFor65CentsChange();
 	return 0;
 }
 
