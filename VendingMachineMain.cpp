@@ -25,6 +25,13 @@ public:
 		VM.ReturnCoins();
 		assert("INSERT COIN" == VM.UserDisplay());
 	}
+	void WhenChipsItemIsSelectedWithEnoughMoneyInsertedDispensesProductandDisplays_THANK_YOU()
+	{
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		assert(true == VM.SelectProduct(Products::PRODUCT_CHIPS));
+		assert("THANK YOU" == VM.UserDisplay());
+	}
 
 };
 
@@ -35,6 +42,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.AcceptsNickelsDimesQuartersButRejectsPennies();
 	Tests.UpdateAndDisplayTheTotalWithEachInsertedCoin();
 	Tests.WhenReturnIsPressedTotalIsZeroAndDisplys_INSERT_COIN();
+	Tests.WhenChipsItemIsSelectedWithEnoughMoneyInsertedDispensesProductandDisplays_THANK_YOU();
 	return 0;
 }
 

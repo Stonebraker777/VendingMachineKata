@@ -22,6 +22,10 @@ bool VendingMachine::AcceptCoin(Coins InsertedCoin)
 
 string VendingMachine::UserDisplay()
 {
+	if (m_ProductDispensedFlag)
+	{
+		return "THANK YOU";
+	}
 	if (m_TotalMoneyInserted != 0)
 	{
 		char str[32] = { 0 };
@@ -34,4 +38,33 @@ string VendingMachine::UserDisplay()
 void VendingMachine::ReturnCoins()
 {
 	m_TotalMoneyInserted = 0;
+}
+
+bool VendingMachine::SelectProduct(Products Item)
+{
+	switch (Item)
+	{
+	case Products::PRODUCT_COLA:
+		if (m_TotalMoneyInserted >= m_PriceOfCola)
+		{
+			m_ProductDispensedFlag = true;
+		}
+		break;
+	case Products::PRODUCT_CHIPS:
+		if (m_TotalMoneyInserted >= m_PriceOfChips)
+		{
+			m_ProductDispensedFlag = true;
+		}
+		break;
+	case Products::PRODUCT_CANDY:
+		if (m_TotalMoneyInserted >= m_PriceOfCandy)
+		{
+			m_ProductDispensedFlag = true;
+		}
+		break;
+	default:
+		m_ProductDispensedFlag = false;
+		break;
+	}
+	return m_ProductDispensedFlag;
 }
