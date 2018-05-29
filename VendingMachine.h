@@ -39,6 +39,7 @@ enum VMState
 	STATE_ACCEPTING_COINS,
 	STATE_VENDING,
 	STATE_INSUFFICIENT_MONEY,
+	STATE_SOLD_OUT,
 };
 
 class VendingMachine
@@ -52,6 +53,10 @@ private:
 	unsigned int m_PriceOfCandy;
 	unsigned int m_PriceOfSelectItem;
 
+	unsigned int m_NumberOfColaItems;
+	unsigned int m_NumberOfChipsItems;
+	unsigned int m_NumberOfCandyItems;
+
 public:
 	ChangeType CoinChange;
 	VendingMachine()
@@ -62,7 +67,11 @@ public:
 		m_PriceOfChips = 50;
 		m_PriceOfCandy = 65;
 
+		m_NumberOfColaItems = 10;
+		m_NumberOfChipsItems = 10;
+		m_NumberOfCandyItems = 10;
 	}
+	void SetItemInventory(unsigned int nCola, unsigned int nChips, unsigned int nCandy);
 	bool AcceptCoin(Coins coin);
 	string UserDisplay();
 	void ReturnCoins();

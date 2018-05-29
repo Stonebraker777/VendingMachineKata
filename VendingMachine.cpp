@@ -1,5 +1,12 @@
 #include "VendingMachine.h"
 
+void VendingMachine::SetItemInventory(unsigned int nCola, unsigned int nChips, unsigned int nCandy)
+{
+	m_NumberOfColaItems = nCola;
+	m_NumberOfChipsItems = nChips;
+	m_NumberOfCandyItems = nCandy;
+}
+
 bool VendingMachine::AcceptCoin(Coins InsertedCoin)
 {
 	switch (InsertedCoin)
@@ -40,6 +47,10 @@ string VendingMachine::UserDisplay()
 		DisplayString = str;
 		m_VendingMachineState = VMState::STATE_ACCEPTING_COINS;
 		break;
+	case VMState::STATE_SOLD_OUT:
+		DisplayString = "SOLD OUT";
+		m_VendingMachineState = VMState::STATE_ACCEPTING_COINS;
+		break;
 	default:
 		DisplayString = "INSERT COIN";
 		break;
@@ -62,6 +73,11 @@ bool VendingMachine::SelectProduct(Products Item)
 	switch (Item)
 	{
 	case Products::PRODUCT_COLA:
+		if (m_NumberOfColaItems == 0)
+		{
+			m_VendingMachineState = VMState::STATE_SOLD_OUT;
+			return false;
+		}
 		m_PriceOfSelectItem = m_PriceOfCola;
 		if (m_TotalMoneyInserted >= m_PriceOfCola)
 		{
@@ -69,6 +85,11 @@ bool VendingMachine::SelectProduct(Products Item)
 		}
 		break;
 	case Products::PRODUCT_CHIPS:
+		if (m_NumberOfChipsItems == 0)
+		{
+			m_VendingMachineState = VMState::STATE_SOLD_OUT;
+			return false;
+		}
 		m_PriceOfSelectItem = m_PriceOfChips;
 		if (m_TotalMoneyInserted >= m_PriceOfChips)
 		{
@@ -76,6 +97,11 @@ bool VendingMachine::SelectProduct(Products Item)
 		}
 		break;
 	case Products::PRODUCT_CANDY:
+		if (m_NumberOfCandyItems == 0)
+		{
+			m_VendingMachineState = VMState::STATE_SOLD_OUT;
+			return false;
+		}
 		m_PriceOfSelectItem = m_PriceOfCandy;
 		if (m_TotalMoneyInserted >= m_PriceOfCandy)
 		{

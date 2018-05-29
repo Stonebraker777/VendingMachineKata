@@ -61,7 +61,14 @@ public:
 		VM.SelectProduct(Products::PRODUCT_CANDY);
 		assert(1 == VM.CoinChange.nDimes);
 	}
-
+	void WhenItemSelectedIsSoldOutDisplayIs_SOLD_OUT()
+	{
+		VM.SetItemInventory(10, 0, 10);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.SelectProduct(Products::PRODUCT_CHIPS);
+		assert("SOLD OUT" == VM.UserDisplay());
+	}
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -76,6 +83,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.WhenAnItemIsSelectedWithoutEnoughMoneyInsertedDisplayIs_PRICEXXXThenDisplaysCurrentAmount();
 	Tests.VerifyMakeChangeMthodReturns2Quarters1DimeAnd1NickelFor65CentsChange();
 	Tests.MakeChangeWhenItemSelectedIsLessThanTheTotalInserted();
+	Tests.WhenItemSelectedIsSoldOutDisplayIs_SOLD_OUT();
 	return 0;
 }
 
