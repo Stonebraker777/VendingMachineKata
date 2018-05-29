@@ -36,6 +36,15 @@ public:
 	{
 		assert("INSERT COIN" == VM.UserDisplay());
 	}
+	void WhenAnItemIsSelectedWithoutEnoughMoneyInsertedDisplayIs_PRICEXXXThenDisplaysCurrentAmount()
+	{
+		VM.ReturnCoins();
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.SelectProduct(Products::PRODUCT_CANDY);
+		assert("PRICE $0.65" == VM.UserDisplay());
+		assert("$0.50" == VM.UserDisplay());
+	}
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -47,6 +56,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.WhenReturnIsPressedTotalIsZeroAndDisplys_INSERT_COIN();
 	Tests.WhenChipsItemIsSelectedWithEnoughMoneyInsertedDispensesProductandDisplays_THANK_YOU();
 	Tests.AfterDispensingAnItemWithExactMoneySetTotalBackToZeroDisplayIs_INSERT_COIN();
+	Tests.WhenAnItemIsSelectedWithoutEnoughMoneyInsertedDisplayIs_PRICEXXXThenDisplaysCurrentAmount();
 	return 0;
 }
 

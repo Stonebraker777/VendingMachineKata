@@ -31,6 +31,7 @@ enum VMState
 	STATE_INSERT_COIN = 0,
 	STATE_ACCEPTING_COINS,
 	STATE_VENDING,
+	STATE_INSUFFICIENT_MONEY,
 };
 
 class VendingMachine
@@ -42,7 +43,7 @@ private:
 	unsigned int m_PriceOfCola;
 	unsigned int m_PriceOfChips;
 	unsigned int m_PriceOfCandy;
-
+	unsigned int m_PriceOfSelectItem;
 	bool m_ProductDispensedFlag;
 
 public:
