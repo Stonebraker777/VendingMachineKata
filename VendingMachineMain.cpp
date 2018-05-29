@@ -52,6 +52,16 @@ public:
 		assert(1 == VM.CoinChange.nDimes);
 		assert(1 == VM.CoinChange.nNickles);
 	}
+	void MakeChangeWhenItemSelectedIsLessThanTheTotalInserted()
+	{
+		VM.ReturnCoins();
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.SelectProduct(Products::PRODUCT_CANDY);
+		assert(1 == VM.CoinChange.nDimes);
+	}
+
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -65,6 +75,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.AfterDispensingAnItemWithExactMoneySetTotalBackToZeroDisplayIs_INSERT_COIN();
 	Tests.WhenAnItemIsSelectedWithoutEnoughMoneyInsertedDisplayIs_PRICEXXXThenDisplaysCurrentAmount();
 	Tests.VerifyMakeChangeMthodReturns2Quarters1DimeAnd1NickelFor65CentsChange();
+	Tests.MakeChangeWhenItemSelectedIsLessThanTheTotalInserted();
 	return 0;
 }
 

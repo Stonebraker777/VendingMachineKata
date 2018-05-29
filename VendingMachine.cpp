@@ -50,6 +50,9 @@ string VendingMachine::UserDisplay()
 void VendingMachine::ReturnCoins()
 {
 	m_TotalMoneyInserted = 0;
+	CoinChange.nQuarters = 0;
+	CoinChange.nDimes = 0;
+	CoinChange.nNickles = 0;
 	m_VendingMachineState = VMState::STATE_INSERT_COIN;
 }
 
@@ -85,6 +88,7 @@ bool VendingMachine::SelectProduct(Products Item)
 	if (ProductDispensedFlag)
 	{
 		m_VendingMachineState = VMState::STATE_VENDING;
+		CoinChange = MakeChange(m_TotalMoneyInserted - m_PriceOfSelectItem);
 	}
 	else
 	{
