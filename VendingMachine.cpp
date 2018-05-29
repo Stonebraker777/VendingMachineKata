@@ -30,3 +30,8 @@ string VendingMachine::UserDisplay()
 	}
 	return "INSERT COIN";
 }
+
+void VendingMachine::ReturnCoins()
+{
+	m_TotalMoneyInserted = 0;
+}

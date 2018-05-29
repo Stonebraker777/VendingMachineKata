@@ -20,6 +20,12 @@ public:
 		VM.AcceptCoin(Coins::DIME);
 		assert("$0.35" == VM.UserDisplay());
 	}
+	void WhenReturnIsPressedTotalIsZeroAndDisplys_INSERT_COIN()
+	{
+		VM.ReturnCoins();
+		assert("INSERT COIN" == VM.UserDisplay());
+	}
+
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -28,6 +34,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.WhenTotalInsertedIsZeroDisplays_INSERT_COIN();
 	Tests.AcceptsNickelsDimesQuartersButRejectsPennies();
 	Tests.UpdateAndDisplayTheTotalWithEachInsertedCoin();
+	Tests.WhenReturnIsPressedTotalIsZeroAndDisplys_INSERT_COIN();
 	return 0;
 }
 

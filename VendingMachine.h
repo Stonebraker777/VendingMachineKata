@@ -31,4 +31,5 @@ public:
 	}
 	bool AcceptCoin(Coins coin);
 	string UserDisplay();
+	void ReturnCoins();
 };
