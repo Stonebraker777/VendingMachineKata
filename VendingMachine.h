@@ -51,7 +51,6 @@ private:
 	unsigned int m_PriceOfChips;
 	unsigned int m_PriceOfCandy;
 	unsigned int m_PriceOfSelectItem;
-	bool m_ProductDispensedFlag;
 
 public:
 	ChangeType CoinChange;
@@ -63,7 +62,6 @@ public:
 		m_PriceOfChips = 50;
 		m_PriceOfCandy = 65;
 
-		m_ProductDispensedFlag = false;
 	}
 	bool AcceptCoin(Coins coin);
 	string UserDisplay();
