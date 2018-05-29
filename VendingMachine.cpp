@@ -17,54 +17,65 @@ bool VendingMachine::AcceptCoin(Coins InsertedCoin)
 		return false;
 		break;
 	}
+	m_VendingMachineState = VMState::STATE_ACCEPTING_COINS;
 	return true;
 }
-
 string VendingMachine::UserDisplay()
 {
-	if (m_ProductDispensedFlag)
+	char str[32] = { 0 };
+	string DisplayString;
+	switch (m_VendingMachineState)
 	{
-		return "THANK YOU";
-	}
-	if (m_TotalMoneyInserted != 0)
-	{
-		char str[32] = { 0 };
+	case VMState::STATE_ACCEPTING_COINS:
 		sprintf_s(str, "$%4.2f", (float)m_TotalMoneyInserted / 100);
-		return (string)str;
+		DisplayString = str;
+		break;
+	case VMState::STATE_VENDING:
+		DisplayString = "THANK YOU";
+		m_VendingMachineState = VMState::STATE_INSERT_COIN;
+		break;
+	default:
+		DisplayString = "INSERT COIN";
+		break;
 	}
-	return "INSERT COIN";
+	return DisplayString;
 }
 
 void VendingMachine::ReturnCoins()
 {
 	m_TotalMoneyInserted = 0;
+	m_VendingMachineState = VMState::STATE_INSERT_COIN;
 }
 
 bool VendingMachine::SelectProduct(Products Item)
 {
+	bool ProductDispensedFlag = false;
 	switch (Item)
 	{
 	case Products::PRODUCT_COLA:
 		if (m_TotalMoneyInserted >= m_PriceOfCola)
 		{
-			m_ProductDispensedFlag = true;
+			ProductDispensedFlag = true;
 		}
 		break;
 	case Products::PRODUCT_CHIPS:
 		if (m_TotalMoneyInserted >= m_PriceOfChips)
 		{
-			m_ProductDispensedFlag = true;
+			ProductDispensedFlag = true;
 		}
 		break;
 	case Products::PRODUCT_CANDY:
 		if (m_TotalMoneyInserted >= m_PriceOfCandy)
 		{
-			m_ProductDispensedFlag = true;
+			ProductDispensedFlag = true;
 		}
 		break;
 	default:
-		m_ProductDispensedFlag = false;
 		break;
 	}
-	return m_ProductDispensedFlag;
+	if (ProductDispensedFlag)
+	{
+		m_VendingMachineState = VMState::STATE_VENDING;
+	}
+	return ProductDispensedFlag;
 }

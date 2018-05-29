@@ -32,7 +32,10 @@ public:
 		assert(true == VM.SelectProduct(Products::PRODUCT_CHIPS));
 		assert("THANK YOU" == VM.UserDisplay());
 	}
-
+	void AfterDispensingAnItemWithExactMoneySetTotalBackToZeroDisplayIs_INSERT_COIN()
+	{
+		assert("INSERT COIN" == VM.UserDisplay());
+	}
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -43,6 +46,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.UpdateAndDisplayTheTotalWithEachInsertedCoin();
 	Tests.WhenReturnIsPressedTotalIsZeroAndDisplys_INSERT_COIN();
 	Tests.WhenChipsItemIsSelectedWithEnoughMoneyInsertedDispensesProductandDisplays_THANK_YOU();
+	Tests.AfterDispensingAnItemWithExactMoneySetTotalBackToZeroDisplayIs_INSERT_COIN();
 	return 0;
 }
 

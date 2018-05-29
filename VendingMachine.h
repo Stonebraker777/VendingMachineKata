@@ -26,9 +26,18 @@ enum Products
 	PRODUCT_CANDY
 };
 
+enum VMState
+{
+	STATE_INSERT_COIN = 0,
+	STATE_ACCEPTING_COINS,
+	STATE_VENDING,
+};
+
 class VendingMachine
 {
 private:
+	VMState m_VendingMachineState;
+
 	unsigned int m_TotalMoneyInserted;
 	unsigned int m_PriceOfCola;
 	unsigned int m_PriceOfChips;
@@ -39,6 +48,7 @@ private:
 public:
 	VendingMachine()
 	{
+		m_VendingMachineState = VMState::STATE_INSERT_COIN;
 		m_TotalMoneyInserted = 0;
 		m_PriceOfCola = 100;
 		m_PriceOfChips = 50;
