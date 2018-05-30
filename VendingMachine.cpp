@@ -139,15 +139,24 @@ bool VendingMachine::SelectProduct(Products Item)
 ChangeType VendingMachine::MakeChange(unsigned int Change)
 {
 	ChangeType CoinChange;
+	if (m_ExactChangeOnlyFlag)
+	{
+		CoinChange.nQuarters = 0;
+		CoinChange.nDimes = 0;
+		CoinChange.nNickles = 0;
+		m_TotalMoneyInserted = 0;
+	}
+	else
+	{
+		CoinChange.nQuarters = Change / $QUARTER;
+		Change %= $QUARTER;
 
-	CoinChange.nQuarters = Change / $QUARTER;
-	Change %= $QUARTER;
+		CoinChange.nDimes = Change / $DIME;
+		Change %= $DIME;
 
-	CoinChange.nDimes = Change / $DIME;
-	Change %= $DIME;
-
-	CoinChange.nNickles = Change / $NICKEL;
-	Change %= $NICKEL;
+		CoinChange.nNickles = Change / $NICKEL;
+		Change %= $NICKEL;
+	}
 
 	return CoinChange;
 }
