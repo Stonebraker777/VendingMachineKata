@@ -69,6 +69,16 @@ public:
 		VM.SelectProduct(Products::PRODUCT_CHIPS);
 		assert("SOLD OUT" == VM.UserDisplay());
 	}
+	void DisplayIsCurrentAmountInsertedAfter_SOLD_OUT()
+	{
+		VM.ReturnCoins();
+		VM.SetItemInventory(10, 0, 10);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.SelectProduct(Products::PRODUCT_CHIPS);
+		VM.UserDisplay();
+		assert("$0.50" == VM.UserDisplay());
+	}
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -84,6 +94,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.VerifyMakeChangeMthodReturns2Quarters1DimeAnd1NickelFor65CentsChange();
 	Tests.MakeChangeWhenItemSelectedIsLessThanTheTotalInserted();
 	Tests.WhenItemSelectedIsSoldOutDisplayIs_SOLD_OUT();
+	Tests.DisplayIsCurrentAmountInsertedAfter_SOLD_OUT();
 	return 0;
 }
 

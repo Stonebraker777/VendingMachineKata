@@ -51,6 +51,7 @@ string VendingMachine::UserDisplay()
 		DisplayString = "SOLD OUT";
 		m_VendingMachineState = VMState::STATE_ACCEPTING_COINS;
 		break;
+	case VMState::STATE_INSERT_COIN:
 	default:
 		DisplayString = "INSERT COIN";
 		break;
