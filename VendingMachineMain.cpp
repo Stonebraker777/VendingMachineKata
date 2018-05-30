@@ -79,6 +79,13 @@ public:
 		VM.UserDisplay();
 		assert("$0.50" == VM.UserDisplay());
 	}
+	void WhenUnableToMakeChangeDisplayIs_EXACT_CHANGE_ONLY_InsteadOf_INSERT_COIN()
+	{
+		VM.SetExactChangeOnlyFlag(true);
+		VM.ReturnCoins();
+		assert("EXACT CHANGE ONLY" == VM.UserDisplay());
+	}
+
 };
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -95,6 +102,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.MakeChangeWhenItemSelectedIsLessThanTheTotalInserted();
 	Tests.WhenItemSelectedIsSoldOutDisplayIs_SOLD_OUT();
 	Tests.DisplayIsCurrentAmountInsertedAfter_SOLD_OUT();
+	Tests.WhenUnableToMakeChangeDisplayIs_EXACT_CHANGE_ONLY_InsteadOf_INSERT_COIN();
 	return 0;
 }
 

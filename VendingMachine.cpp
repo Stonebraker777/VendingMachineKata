@@ -53,7 +53,14 @@ string VendingMachine::UserDisplay()
 		break;
 	case VMState::STATE_INSERT_COIN:
 	default:
-		DisplayString = "INSERT COIN";
+		if (m_ExactChangeOnlyFlag)
+		{
+			DisplayString = "EXACT CHANGE ONLY";
+		}
+		else
+		{
+			DisplayString = "INSERT COIN";
+		}
 		break;
 	}
 	return DisplayString;
@@ -66,6 +73,11 @@ void VendingMachine::ReturnCoins()
 	CoinChange.nDimes = 0;
 	CoinChange.nNickles = 0;
 	m_VendingMachineState = VMState::STATE_INSERT_COIN;
+}
+
+void VendingMachine::SetExactChangeOnlyFlag(bool flag)
+{
+	m_ExactChangeOnlyFlag = true;
 }
 
 bool VendingMachine::SelectProduct(Products Item)

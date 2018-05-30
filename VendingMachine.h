@@ -57,6 +57,8 @@ private:
 	unsigned int m_NumberOfChipsItems;
 	unsigned int m_NumberOfCandyItems;
 
+	bool m_ExactChangeOnlyFlag;
+
 public:
 	ChangeType CoinChange;
 	VendingMachine()
@@ -70,6 +72,8 @@ public:
 		m_NumberOfColaItems = 10;
 		m_NumberOfChipsItems = 10;
 		m_NumberOfCandyItems = 10;
+
+		m_ExactChangeOnlyFlag = false;
 	}
 	void SetItemInventory(unsigned int nCola, unsigned int nChips, unsigned int nCandy);
 	bool AcceptCoin(Coins coin);
@@ -77,4 +81,5 @@ public:
 	void ReturnCoins();
 	bool SelectProduct(Products Item);
 	ChangeType MakeChange(unsigned int Change);
+	void SetExactChangeOnlyFlag(bool flag);
 };
