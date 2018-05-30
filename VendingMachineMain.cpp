@@ -96,6 +96,16 @@ public:
 		assert(0 == VM.CoinChange.nDimes);
 		assert(0 == VM.CoinChange.nNickles);
 	}
+	void WhenUnableToMakeChangeMachineWillDispenseIfEnoughMoneyInsertedAndDisplay_THANK_YOU_Then_EXACT_CHANGE_ONLY()
+	{
+		VM.ReturnCoins();
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.AcceptCoin(Coins::QUARTER);
+		VM.SelectProduct(Products::PRODUCT_CANDY);
+		assert("THANK YOU" == VM.UserDisplay());
+		assert("EXACT CHANGE ONLY" == VM.UserDisplay());
+	}
 
 };
 
@@ -115,6 +125,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Tests.DisplayIsCurrentAmountInsertedAfter_SOLD_OUT();
 	Tests.WhenUnableToMakeChangeDisplayIs_EXACT_CHANGE_ONLY_InsteadOf_INSERT_COIN();
 	Tests.WhenUnableToMakeChangeMachineWillKeepAnythingOverItemPrice();
+	Tests.WhenUnableToMakeChangeMachineWillDispenseIfEnoughMoneyInsertedAndDisplay_THANK_YOU_Then_EXACT_CHANGE_ONLY();
 	return 0;
 }
 
