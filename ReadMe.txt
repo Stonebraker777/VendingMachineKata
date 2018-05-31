@@ -1,0 +1,1 @@
+This app demonstrates Test Driven Development.  The main() calls test methods to verify the code.  The VendingMachine class models the brains of a vending machine and could be easily modified to interface with actual control hardware and sensors and with a user panel.  Each test method was written to cover a feature of the given functional requirements.
